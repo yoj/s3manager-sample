@@ -9,14 +9,20 @@ import (
 
 const (
 	region = endpoints.ApNortheast1RegionID
+	dir    = ""
+	backet = ""
 )
 
 func main() {
+
 	sess := session.Must(session.NewSession(&aws.Config{
 		Region: aws.String(region)}),
 	)
 
-	uploader := s3.NewUploader(sess, "test")
+	// S3 Managerの新規作成
+	uploader := s3.NewUploader(sess, dir, backet)
 
-	uploader.Upload()
+	// S3へのアップロード処理
+	uploader.UploadInDir()
+
 }
